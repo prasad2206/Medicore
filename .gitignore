@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Node modules
+frontend/node_modules/
+backend/bin/
+backend/obj/
+.vscode/
+.env
+*.log
