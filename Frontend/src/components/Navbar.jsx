@@ -1,22 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    toast.success("Logged out successfully!");
-    navigate("/");
-  };
+  const { user, logout } = useAuth();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-4">
       <span className="navbar-brand fw-bold text-primary">MediCore HMS</span>
-      <button className="btn btn-outline-danger ms-auto" onClick={handleLogout}>
-        Logout
-      </button>
+      <div className="ms-auto d-flex align-items-center">
+        {user && (
+          <span className="me-3 text-muted">
+            {user.name} ({user.role})
+          </span>
+        )}
+        <button className="btn btn-outline-danger" onClick={logout}>
+          Logout
+        </button>
+      </div>
     </nav>
   );
 }

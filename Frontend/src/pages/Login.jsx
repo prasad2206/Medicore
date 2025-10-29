@@ -1,16 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
-  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Mock login
-    localStorage.setItem("token", "demo-token");
-    toast.success("Login successful!");
-    navigate("/dashboard");
+    login(email, password);
   };
 
   return (
@@ -19,18 +17,30 @@ function Login() {
       style={{ height: "100vh" }}
     >
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleSubmit}
         className="border p-4 rounded shadow bg-white"
         style={{ width: "350px" }}
       >
         <h4 className="text-center mb-3 text-primary">MediCore Login</h4>
         <div className="mb-3">
           <label>Email</label>
-          <input type="email" className="form-control" required />
+          <input
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
         <div className="mb-3">
           <label>Password</label>
-          <input type="password" className="form-control" required />
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
         <button type="submit" className="btn btn-primary w-100">
           Login

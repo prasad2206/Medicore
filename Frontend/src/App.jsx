@@ -1,20 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import ProtectedRoute from "./components/ProtectedRoute";
-
-// Pages
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Doctors from "./pages/Doctors";
 import Patients from "./pages/Patients";
 import Appointments from "./pages/Appointments";
 import Billing from "./pages/Billing";
 
+
+
 function App() {
   return (
-    <Router>
+    <>
       <Toaster position="top-right" />
       <div className="d-flex">
         <Sidebar />
@@ -22,6 +23,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route
               path="/dashboard"
               element={
@@ -65,7 +67,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </Router>
+    </>
   );
 }
 
