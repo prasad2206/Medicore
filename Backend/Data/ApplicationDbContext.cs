@@ -28,7 +28,7 @@ namespace MediCore.Api.Data
             // We'll create admin user seed after hashing password in code during migration or use a known hashed value:
             var adminPasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123");
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Admin User", Email = "admin@medi.com", PasswordHash = adminPasswordHash, RoleId = 1 }
+                new User { Id = 1, Name = "Admin User", Email = "admin@medi.com", PasswordHash = "$2a$11$I2ohGwMjqvKviL3QUfMIpumKctHVLPgOP5DhVLXESYOSbAttlSHy6", RoleId = 1 }
             );
 
             // (Optional) seed sample doctors/patients similar to frontend mock

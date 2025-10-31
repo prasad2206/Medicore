@@ -18,7 +18,14 @@ namespace MediCore.Api.Controllers
         public async Task<IActionResult> GetAll() => Ok(await _db.Doctors.ToListAsync());
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id) => Ok(await _db.Doctors.FindAsync(id) ?? Results.NotFound());
+        public async Task<IActionResult> Get(int id)
+        {
+            var doctor = await _db.Doctors.FindAsync(id);
+            if (doctor == null)
+                return NotFound();
+            return Ok(doctor);
+        }
+
 
         [HttpPost]
         [Authorize(Roles = "Admin")]

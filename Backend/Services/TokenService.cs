@@ -15,7 +15,7 @@ namespace MediCore.Api.Services
         public string CreateToken(User user, string roleName)
         {
             var jwt = _config.GetSection("Jwt");
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
@@ -30,7 +30,7 @@ namespace MediCore.Api.Services
                 issuer: jwt["Issuer"],
                 audience: jwt["Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(int.Parse(jwt["DurationMinutes"])),
+                expires: DateTime.UtcNow.AddMinutes(int.Parse(jwt["DurationMinutes"]!)),
                 signingCredentials: creds
             );
 
